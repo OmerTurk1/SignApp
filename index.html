@@ -1,64 +1,42 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Akıllı Chatbot</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <title>Veri Gönderme Formu</title>
 </head>
 <body>
-  <div class="container">
-    <div class="chat-card">
-      <div class="chat-header">
-        <h2>🤖 Akıllı Chatbot</h2>
-      </div>
-      <div class="chat-box" id="chat-box">
-        <div class="message bot">Merhaba! Size nasıl yardımcı olabilirim?</div>
-      </div>
-      <div class="input-area">
-        <input type="text" id="user-input" placeholder="Bir şeyler yazın..." />
-        <button onclick="sendMessage()">Gönder</button>
-      </div>
-    </div>
-  </div>
+  <h2>Form</h2>
+  <form id="data-form">
+    <input type="text" name="name" placeholder="Adınız" required><br>
+    <input type="email" name="email" placeholder="E-posta" required><br>
+    <textarea name="message" placeholder="Mesajınız" required></textarea><br>
+    <button type="submit">Gönder</button>
+  </form>
 
   <script>
-  async function sendMessage() {
-    const input = document.getElementById("user-input");
-    const message = input.value.trim();
-    if (message === "") return;
+    document.getElementById("data-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      
+      const formData = {
+        name: this.name.value,
+        email: this.email.value,
+        message: this.message.value
+      };
 
-    const chatBox = document.getElementById("chat-box");
-
-    const userMessage = document.createElement("div");
-    userMessage.className = "message user";
-    userMessage.textContent = message;
-    chatBox.appendChild(userMessage);
-
-    try {
-      const response = await fetch("http://127.0.0.1:5000/chat", {
+      fetch("YOUR_WEB_APP_URL", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ mesaj: message })
+        body: JSON.stringify(formData),
+        headers: { "Content-Type": "application/json" }
+      })
+      .then(response => response.text())
+      .then(result => {
+        alert("Veri gönderildi: " + result);
+        this.reset();
+      })
+      .catch(error => {
+        alert("Hata oluştu: " + error);
       });
-
-      const data = await response.json();
-
-      const botMessage = document.createElement("div");
-      botMessage.className = "message bot";
-      botMessage.textContent = data.cevap;
-      chatBox.appendChild(botMessage);
-    } catch (error) {
-      const errorMessage = document.createElement("div");
-      errorMessage.className = "message bot";
-      errorMessage.textContent = "Sunucuya bağlanılamadı.";
-      chatBox.appendChild(errorMessage);
-    }
-
-    input.value = "";
-    chatBox.scrollTop = chatBox.scrollHeight;
-  }
-</script>
+    });
+  </script>
 </body>
 </html>
