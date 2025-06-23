@@ -2,42 +2,46 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Basit Chatbot</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Akıllı Chatbot</title>
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <div class="chat-container">
-    <div class="chat-box" id="chat-box">
-      <div class="message bot">Merhaba! Size nasıl yardımcı olabilirim?</div>
-    </div>
-    <div class="input-area">
-      <input type="text" id="user-input" placeholder="Mesajınızı yazın..." />
-      <button onclick="sendMessage()">Gönder</button>
+  <div class="container">
+    <div class="chat-card">
+      <div class="chat-header">
+        <h2>🤖 Akıllı Chatbot</h2>
+      </div>
+      <div class="chat-box" id="chat-box">
+        <div class="message bot">Merhaba! Size nasıl yardımcı olabilirim?</div>
+      </div>
+      <div class="input-area">
+        <input type="text" id="user-input" placeholder="Bir şeyler yazın..." />
+        <button onclick="sendMessage()">Gönder</button>
+      </div>
     </div>
   </div>
 
   <script>
     function sendMessage() {
-      const input = document.getElementById('user-input');
+      const input = document.getElementById("user-input");
       const message = input.value.trim();
-      if (message === '') return;
+      if (message === "") return;
 
-      const chatBox = document.getElementById('chat-box');
+      const chatBox = document.getElementById("chat-box");
 
-      // Kullanıcı mesajı
-      const userMessage = document.createElement('div');
-      userMessage.className = 'message user';
+      const userMessage = document.createElement("div");
+      userMessage.className = "message user";
       userMessage.textContent = message;
       chatBox.appendChild(userMessage);
 
-      // Bot cevabı (sabit örnek cevap)
-      const botMessage = document.createElement('div');
-      botMessage.className = 'message bot';
-      botMessage.textContent = 'Bu sabit bir yanıt. Gelişmiş cevaplar için backend entegrasyonu gerekir.';
+      const botMessage = document.createElement("div");
+      botMessage.className = "message bot";
+      botMessage.textContent = "Bu sadece örnek bir cevap. Gerçek cevaplar için API entegrasyonu gerekir.";
       chatBox.appendChild(botMessage);
 
-      input.value = '';
+      input.value = "";
       chatBox.scrollTop = chatBox.scrollHeight;
     }
   </script>
