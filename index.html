@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Basit Chatbot</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-box" id="chat-box">
+      <div class="message bot">Merhaba! Size nasıl yardımcı olabilirim?</div>
+    </div>
+    <div class="input-area">
+      <input type="text" id="user-input" placeholder="Mesajınızı yazın..." />
+      <button onclick="sendMessage()">Gönder</button>
+    </div>
+  </div>
+
+  <script>
+    function sendMessage() {
+      const input = document.getElementById('user-input');
+      const message = input.value.trim();
+      if (message === '') return;
+
+      const chatBox = document.getElementById('chat-box');
+
+      // Kullanıcı mesajı
+      const userMessage = document.createElement('div');
+      userMessage.className = 'message user';
+      userMessage.textContent = message;
+      chatBox.appendChild(userMessage);
+
+      // Bot cevabı (sabit örnek cevap)
+      const botMessage = document.createElement('div');
+      botMessage.className = 'message bot';
+      botMessage.textContent = 'Bu sabit bir yanıt. Gelişmiş cevaplar için backend entegrasyonu gerekir.';
+      chatBox.appendChild(botMessage);
+
+      input.value = '';
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  </script>
+</body>
+</html>
