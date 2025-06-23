@@ -24,26 +24,41 @@
   </div>
 
   <script>
-    function sendMessage() {
-      const input = document.getElementById("user-input");
-      const message = input.value.trim();
-      if (message === "") return;
+  async function sendMessage() {
+    const input = document.getElementById("user-input");
+    const message = input.value.trim();
+    if (message === "") return;
 
-      const chatBox = document.getElementById("chat-box");
+    const chatBox = document.getElementById("chat-box");
 
-      const userMessage = document.createElement("div");
-      userMessage.className = "message user";
-      userMessage.textContent = message;
-      chatBox.appendChild(userMessage);
+    const userMessage = document.createElement("div");
+    userMessage.className = "message user";
+    userMessage.textContent = message;
+    chatBox.appendChild(userMessage);
+
+    try {
+      const response = await fetch("http://127.0.0.1:5000/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ mesaj: message })
+      });
+
+      const data = await response.json();
 
       const botMessage = document.createElement("div");
       botMessage.className = "message bot";
-      botMessage.textContent = "Bu sadece örnek bir cevap. Gerçek cevaplar için API entegrasyonu gerekir.";
+      botMessage.textContent = data.cevap;
       chatBox.appendChild(botMessage);
-
-      input.value = "";
-      chatBox.scrollTop = chatBox.scrollHeight;
+    } catch (error) {
+      const errorMessage = document.createElement("div");
+      errorMessage.className = "message bot";
+      errorMessage.textContent = "Sunucuya bağlanılamadı.";
+      chatBox.appendChild(errorMessage);
     }
-  </script>
+
+    input.value = "";
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
+</script>
 </body>
 </html>
