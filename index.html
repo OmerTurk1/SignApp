@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <title>Veri Gönderme Formu</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h2>Form</h2>
   <form id="data-form">
-    <input type="text" name="name" placeholder="Adınız" required><br>
-    <input type="email" name="email" placeholder="E-posta" required><br>
-    <textarea name="message" placeholder="Mesajınız" required></textarea><br>
+    <h2>Form</h2>
+    <input type="text" name="name" placeholder="Adınız" required>
+    <input type="email" name="email" placeholder="E-posta" required>
+    <textarea name="message" placeholder="Mesajınız" required></textarea>
     <button type="submit">Gönder</button>
   </form>
 
@@ -24,20 +25,18 @@
       };
 
       fetch("https://script.google.com/macros/s/AKfycbwJ1Zm1EPWeXhGxalqkBATH3oYzgiFNk57fwIafcDydfhHd8qea8oG3Iw16qenfSJNpmQ/exec", {
-  method: "POST",
-  mode: "no-cors", // önemli: fetch başarısız olsa bile bu sayede gönderme çalışabilir
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify(formData)
-})
-.then(() => {
-  alert("Veri gönderildi!");
-})
-.catch(error => {
-  alert("Hata oluştu: " + error);
-});
-
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+      })
+      .then(() => {
+        alert("Veri gönderildi!");
+        this.reset();
+      })
+      .catch(error => {
+        alert("Hata oluştu: " + error);
+      });
     });
   </script>
 </body>
