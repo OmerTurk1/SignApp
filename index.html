@@ -14,7 +14,7 @@
     <button type="submit">Gönder</button>
   </form>
 
-  <script>
+<script>
   document.getElementById("data-form").addEventListener("submit", function(e) {
     e.preventDefault();
 
@@ -30,6 +30,7 @@
 
     fetch("https://script.google.com/macros/s/AKfycbwJ1Zm1EPWeXhGxalqkBATH3oYzgiFNk57fwIafcDydfhHd8qea8oG3Iw16qenfSJNpmQ/exec", {
       method: "POST",
+      mode: "no-cors",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData)
     })
@@ -46,5 +47,6 @@
     });
   });
 </script>
+
 </body>
 </html>
