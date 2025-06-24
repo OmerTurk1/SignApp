@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>Veri Gönderme Formu</title>
+  <title>Mesaj Gönderme Formu</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -35,7 +35,7 @@
       body: JSON.stringify(formData)
     })
     .then(() => {
-      alert("Veri gönderildi!");
+      alert("Mesaj gönderildi!");
       button.textContent = "Gönder";
       button.disabled = false;
       this.reset();
