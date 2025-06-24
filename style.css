@@ -2,7 +2,7 @@
 
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f2f2f2;
+  background: linear-gradient(to bottom right, #ff7e00, #ffe600); /* turuncudan sarıya */
   margin: 0;
   padding: 0;
   display: flex;
@@ -41,12 +41,12 @@ textarea {
 
 input:focus,
 textarea:focus {
-  border-color: #0077ff;
+  border-color: #ff7e00;
 }
 
 button {
   padding: 12px;
-  background-color: #0077ff;
+  background-color: #ff7e00;
   color: white;
   border: none;
   border-radius: 8px;
@@ -56,5 +56,5 @@ button {
 }
 
 button:hover {
-  background-color: #005ccc;
+  background-color: #e06600;
 }
